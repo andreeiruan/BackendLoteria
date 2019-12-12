@@ -10,6 +10,10 @@ const VerificationController = require('./controllers/VerificationController')
 
 const routes = express.Router()
 
+routes.post('/', (req, res) =>{
+  return res.send('Ola Mundo')
+})
+
 // User
 routes.post('/users', UserController.store)
 routes.post('/authenticate', UserController.auth)
