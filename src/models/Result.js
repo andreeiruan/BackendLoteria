@@ -12,6 +12,9 @@ class Result extends Model{
   }
   static associate(models){
     this.belongsTo(models.Contest, { foreignKey: 'id_contest', as: 'results'})
+    this.belongsTo(models.Result, {
+      foreignKey: 'type_game', as: 'type'
+    })
   }
 }
 module.exports = Result

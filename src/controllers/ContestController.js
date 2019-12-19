@@ -29,6 +29,14 @@ module.exports = {
       include: {association: 'type'}
     })
     return res.json(contests)
+  },
+  async showResults(req, res){
+    const { id_type, id } = req.params
+    const contest = await Contest.findOne({ where: {
+      id
+    }})
+
+    return res.json(contest)
   }
 
 

@@ -10,8 +10,6 @@ const Result = require('../models/Result')
 // require('dotenv').config()
 const connection = new Sequelize(dbconfig)
 
-console.log( 'AQUI', process.env.DB_HOST)
-
 Game.init(connection)
 User.init(connection)
 TypeGame.init(connection)

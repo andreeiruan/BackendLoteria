@@ -10,9 +10,6 @@ const VerificationController = require('./controllers/VerificationController')
 
 const routes = express.Router()
 
-routes.post('/', (req, res) =>{
-  return res.send('Ola Mundo')
-})
 
 // User
 routes.post('/users', UserController.store)
@@ -40,5 +37,7 @@ routes.get('/games/:id_user/:id_type', GameController.show)
 // Draw and verification
 routes.get('/draw', VerificationController.draw)
 routes.get('/verification', VerificationController.verificationGames)
+routes.get('/results/:type_game', VerificationController.showResults)
+
 
 module.exports = routes

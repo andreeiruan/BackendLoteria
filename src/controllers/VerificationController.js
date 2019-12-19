@@ -43,7 +43,8 @@ module.exports = {
 
           const result = await Result.create({
            id_contest: contest.id,
-           result: sorted
+           result: sorted,
+           type_game: contest.id_type_game
           })
 
           contest.update({
@@ -94,5 +95,19 @@ module.exports = {
 
   
     return res.json(winners)
+   },
+   async showResults(req, res){
+     const { type_game } = req.params
+
+    const lastResult = await Result.max('id', {
+      where: {
+        type_game: type_game
+      }
+    })
+    const result = await Result.findByPk(lastResult, {
+      include: { association: 'results'} 
+    })
+
+    res.json(result)
    }
 }
