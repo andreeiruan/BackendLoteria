@@ -13,7 +13,7 @@ class Game extends Model{
   }
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'id_user', as: 'player'})
-    // this.belongsTo(models.TypeGame, { foreignKey: 'id_type', as: 'type_game' })
+    this.belongsTo(models.TypeGame, { foreignKey: 'id_type', as: 'type_game' })
     this.belongsTo(models.Contest, { foreignKey: 'id_contest', as: 'contest'})
     this.belongsTo(models.Result, { foreignKey: 'type_game', as: 'result'})
   }
