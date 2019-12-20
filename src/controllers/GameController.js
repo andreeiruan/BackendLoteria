@@ -59,7 +59,6 @@ module.exports = {
 
     return res.json(game)
   },
-
   async index(req, res){
     const { id_user } = req.params
 

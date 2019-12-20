@@ -4,7 +4,8 @@ class Result extends Model{
   static init(sequelize){
     super.init({
       id_contest: DataTypes.INTEGER,
-      result: DataTypes.STRING
+      result: DataTypes.STRING,
+      type_game: DataTypes.INTEGER
     },
      {
        sequelize
