@@ -33,6 +33,7 @@ routes.get('/contests/:id_type', ContestController.show)
 routes.post('/games', GameController.store)
 routes.get('/games/:id_user', GameController.index)
 routes.get('/games/:id_user/:id_type', GameController.show)
+routes.get('/everygames/:id_user/:id_type', GameController.every)
 
 // Draw and verification
 routes.get('/draw', VerificationController.draw)

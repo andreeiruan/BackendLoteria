@@ -104,5 +104,20 @@ module.exports = {
     }})
 
     return res.json(lastGame)
+  },
+  async every(req, res){
+    const { id_user, id_type } = req.params
+
+    const games = await Game.findAll({
+      where: {
+        id_user,
+        id_type
+      },
+      include: {
+        association: 'contest'
+      }     
+    })
+
+    return res.json(games)
   }
 }
