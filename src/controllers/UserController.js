@@ -13,7 +13,7 @@ module.exports = {
         email
       }
     })
-    console.log(emailExists)
+    
     if(emailExists.length > 0){
       return res.json({ error: "Esse email já está cadastrado"})
     }
@@ -24,9 +24,9 @@ module.exports = {
 
     const hash = await bcrypt.hash(password, 10)
 
-    // const user = await User.create({ name, email, password: hash})
+    const user = await User.create({ name, email, password: hash})
 
-    // user.password = undefined
+    user.password = undefined
 
     return res.json({user: true})
   },
