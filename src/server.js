@@ -7,9 +7,7 @@ require('./database')
 
 const app = express()
 
-app.use(cors({
-  origin: process.env.CORS_SAFE
-}))
+app.use(cors())
 app.use(express.json())
 app.use(routes)
 
