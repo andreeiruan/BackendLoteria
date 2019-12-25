@@ -8,27 +8,27 @@ module.exports = {
   async store(req, res){
     const { name, email, password } = req.body
 
-    if(password.length < 6){
-      return res.status(406).json({ error: "Senha muito curta, 6 caracteres no mínimo!"})
-    }
-
     const emailExists = await User.findAll({
       where: {
         email
       }
     })
-
+    console.log(emailExists)
     if(emailExists.length > 0){
-      return res.status(400).json({ error: "Esse email já está cadastrado"})
+      return res.json({ error: "Esse email já está cadastrado"})
+    }
+
+    if(password.length < 6){
+      return res.json({ error: "Senha muito curta, 6 caracteres no mínimo!"})
     }
 
     const hash = await bcrypt.hash(password, 10)
 
-    const user = await User.create({ name, email, password: hash})
+    // const user = await User.create({ name, email, password: hash})
 
-    user.password = undefined
+    // user.password = undefined
 
-    return res.json(user)
+    return res.json({user: true})
   },
 
   async auth(req, res){
@@ -37,11 +37,11 @@ module.exports = {
     const user = await User.findOne({ where: { email }})
 
     if(!user){
-      return res.status(400).json({ error: 'Usuário não encontrado!'})
+      return res.json({ error: 'Email não encontrado'})
     }
     
     if(!await bcrypt.compare(password, user.password)){
-      return res.status(400).json({ error: "Senha invalida!"})
+      return res.json({ error: "Senha inválida"})
     }
 
     user.password = undefined
