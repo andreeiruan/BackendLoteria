@@ -37,6 +37,20 @@ module.exports = {
     }})
 
     return res.json(contest)
+  },
+  async showContest(req, res){
+    const {
+      id_type
+    } = req.params
+    const contests = await Contest.findAll({
+      where: {
+        id_type_game: id_type,
+      },
+      include: {
+        association: 'results'
+      }
+    })
+    return res.json(contests)
   }
 
 

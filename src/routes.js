@@ -27,6 +27,7 @@ routes.get('/typesgame', TypeGameController.index)
 routes.post('/contests', ContestController.store)
 routes.get('/contests', ContestController.index)
 routes.get('/contests/:id_type', ContestController.show)
+routes.get('/contestsfortype/:id_type', ContestController.showContest)
 // routes.get('/contests/:id_contest', ContestController.show)
 
 // Games
