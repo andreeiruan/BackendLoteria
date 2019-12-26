@@ -48,9 +48,9 @@ module.exports = async function draw(req, res, next) {
         contest.update({
           accomplished: true
         })
+        console.log(`CONCURSO ${contest.id} REALIZADO!`);
   
       }
-    }
-    console.log('Sorteio realizado')
+    }    
     return next()
   }
