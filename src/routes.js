@@ -1,6 +1,7 @@
 const express = require('express')
 
 const authMiddleware = require('./middlewares/auth')
+const draw = require('./middlewares/draw')
 
 const UserController = require('./controllers/UserController')
 const TypeGameController = require('./controllers/TypeGameController')
@@ -12,11 +13,13 @@ const routes = express.Router()
 
 
 // User
+
 routes.post('/users', UserController.store)
 routes.post('/authenticate', UserController.auth)
 
 // Middleware de Autenticação
 routes.use(authMiddleware)
+routes.use(draw)
 routes.get('/users/:id', UserController.show)
 
 // TypesGames
@@ -37,7 +40,6 @@ routes.get('/games/:id_user/:id_type', GameController.show)
 routes.get('/everygames/:id_user/:id_type', GameController.every)
 
 // Draw and verification
-routes.get('/draw', VerificationController.draw)
 routes.get('/verification', VerificationController.verificationGames)
 routes.get('/results/:type_game', VerificationController.showResults)
 
