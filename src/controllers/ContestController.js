@@ -48,7 +48,8 @@ module.exports = {
       },
       include: {
         association: 'results'
-      }
+      },
+      order: ['date']
     })
     return res.json(contests)
   }
