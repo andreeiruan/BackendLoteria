@@ -12,6 +12,5 @@ app.use(express.json())
 app.use(routes)
 
 app.listen(process.env.PORT || 3333, () => {
-  console.log(process.env.CORS_SAFE);
-  console.log(`Server running in ${process.env.DB_HOST}`)
+  console.log(`Banco de dados: ${process.env.DB_HOST}`)
 })

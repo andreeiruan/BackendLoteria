@@ -1,4 +1,5 @@
 const express = require('express')
+const nodeMailer = require('nodemailer')
 
 const authMiddleware = require('./middlewares/auth')
 const draw = require('./middlewares/draw')
@@ -11,6 +12,60 @@ const GameController = require('./controllers/GameController')
 const VerificationController = require('./controllers/VerificationController')
 
 const routes = express.Router()
+
+// Envio de email 
+routes.get('/contador', (req, res) => {
+  const { useragent, platform } = req.query
+  
+  let transporter = nodeMailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.USER_EMAIL,
+      pass: process.env.PASS_EMAIL
+    }
+  })
+
+  transporter.sendMail({
+    from: process.env.USER_EMAIL,
+    to: process.env.USER_EMAIL,
+    subject: 'Novo Acesso',
+    text: `Portifolio tem um novo acesso: user agent ${useragent}, plataforma: ${platform}`
+  }).then(info => {
+    console.log('Enviouuu');
+    return res.json(info)
+  }).catch(err => {
+    console.log(err);
+  })
+})
+
+
+routes.get('/envio', (req, res) => {
+  const { email, comentario } = req.query
+
+  const transporter = nodeMailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.USER_EMAIL,
+      pass: process.env.PASS_EMAIL
+    }
+  })
+
+  transporter.sendMail({
+    from: process.env.USER_EMAIL,
+    to: process.env.USER_EMAIL,
+    subject: 'Feedback',
+    html: `<strong>O usuário ${email} deixou o seguinte feedback!</strong><br><p>${comentario}</p>`
+  }).then(info => {
+    console.log('Enviouuuu');
+    return res.json(info)
+  }).catch(err => {
+    console.log(err);
+  })
+})
 
 // User
 routes.post('/users', UserController.store)
